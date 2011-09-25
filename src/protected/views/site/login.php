@@ -2,9 +2,11 @@
 $this->pageTitle=Yii::app()->name . ' - Login';
 ?>
 
-<h1>Login</h1>
+<hr />
 
-<div class="form">
+<h1 class="center">Login</h1>
+
+<div class="form center">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',
 	'enableClientValidation'=>true,
