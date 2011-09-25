@@ -14,3 +14,12 @@ Remember to change the following things when using this tool on a production ser
 
 - Switch from SQLite to MySQL (or another production database)
 - Disable Gii (used for code generation, definitely not needed in production)
+- Remove default users (test1, test2, test3)
+
+### Default Users ###
+
+Currently there are three default users (all using the same salt, because I'm lazy):
+
+- test1 (password: test1)
+- test2 (password: test2)
+- test3 (password: test3)
