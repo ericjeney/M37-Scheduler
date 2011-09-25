@@ -14,6 +14,15 @@ CREATE TABLE tbl_options (
 	room VARCHAR(3) DEFAULT ''
 );
 
+CREATE TABLE tbl_assignments (
+	id INTEGER NOT NULL PRIMARY KEY,
+	assignment_date DATE,
+	user_id INTEGER,
+	option_id INTEGER,
+	FOREIGN KEY(user_id) REFERENCES tbl_user(id),
+	FOREIGN KEY(option_id) REFERENCES tbl_options(id)
+);
+
 INSERT INTO tbl_options (title) VALUES ('ECET');	
 INSERT INTO tbl_options (title) VALUES ('CMET');
 INSERT INTO tbl_options (title) VALUES ('AP Calculus');
