@@ -1,7 +1,7 @@
 DROP TABLE tbl_user;
 
 CREATE TABLE tbl_user (
-    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id INTEGER NOT NULL PRIMARY KEY,
     username VARCHAR(128) NOT NULL,
     password VARCHAR(128) NOT NULL,
     salt VARCHAR(10) NOT NULL,
@@ -12,6 +12,15 @@ CREATE TABLE tbl_options (
 	id INTEGER NOT NULL PRIMARY KEY,
 	title VARCHAR(30) NOT NULL,
 	room VARCHAR(3) DEFAULT ''
+);
+
+CREATE TABLE tbl_assignments (
+	id INTEGER NOT NULL PRIMARY KEY,
+	assignment_date DATE,
+	user_id INTEGER,
+	option_id INTEGER,
+	FOREIGN KEY(user_id) REFERENCES tbl_user(id),
+	FOREIGN KEY(option_id) REFERENCES tbl_options(id)
 );
 
 INSERT INTO tbl_options (title) VALUES ('ECET');	
