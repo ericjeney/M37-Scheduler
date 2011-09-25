@@ -23,7 +23,33 @@ CREATE TABLE tbl_assignments (
 	FOREIGN KEY(offering_id) REFERENCES tbl_offerings(id)
 );
 
-INSERT INTO tbl_offerings (title) VALUES ('ECET');	
+CREATE TABLE tbl_pass (
+	id INTEGER NOT NULL PRIMARY KEY,
+	user_id INTEGER,
+	offering_id INTEGER,
+	FOREIGN KEY(user_id) REFERENCES tbl_user(id),
+	FOREIGN KEY(offering_id) REFERENCES tbl_offerings(id)
+);
+
+CREATE TABLE tbl_assist (
+	id INTEGER NOT NULL PRIMARY KEY,
+	user_id INTEGER,
+	offering_id INTEGER,
+	FOREIGN KEY(user_id) REFERENCES tbl_user(id),
+	FOREIGN KEY(offering_id) REFERENCES tbl_offerings(id)
+);
+
+CREATE TABLE tbl_matchup (
+	id INTEGER NOT NULL PRIMARY KEY,
+	match_date DATE,
+	pass_id INTEGER,
+	assist_id INTEGER,
+	topic VARCHAR(250),
+	FOREIGN KEY(pass_id) REFERENCES tbl_pass(id),
+	FOREIGN KEY(assist_id) REFERENCES tbl_assist(id)
+);
+
+INSERT INTO tbl_offerings (title) VALUES ('ECET');
 INSERT INTO tbl_offerings (title) VALUES ('CMET');
 INSERT INTO tbl_offerings (title) VALUES ('AP Calculus');
 INSERT INTO tbl_offerings (title) VALUES ('Honors Calculus');
@@ -36,7 +62,7 @@ INSERT INTO tbl_offerings (title) VALUES ('Environmental Science');
 INSERT INTO tbl_offerings (title) VALUES ('Biology');
 INSERT INTO tbl_offerings (title) VALUES ('Chemistry');
 INSERT INTO tbl_offerings (title) VALUES ('Physics');
-INSERT INTO tbl_offerings (title) VALUES ('World History I'); 
+INSERT INTO tbl_offerings (title) VALUES ('World History I');
 INSERT INTO tbl_offerings (title) VALUES ('American History');
 INSERT INTO tbl_offerings (title) VALUES ('American History II');
 INSERT INTO tbl_offerings (title) VALUES ('Contemporary History');
@@ -49,7 +75,7 @@ INSERT INTO tbl_offerings (title) VALUES ('Spanish'); --Probably not being offer
 
 INSERT INTO tbl_offerings (title) VALUES ('Screamin Eagles');
 INSERT INTO tbl_offerings (title) VALUES ('Baila Baila');
-INSERT INTO tbl_offerings (title) VALUES ('Reading Roundtables'); 
+INSERT INTO tbl_offerings (title) VALUES ('Reading Roundtables');
 INSERT INTO tbl_offerings (title) VALUES ('Standardized Test Prep');
 INSERT INTO tbl_offerings (title) VALUES ('Accuplacer Prep');
 INSERT INTO tbl_offerings (title) VALUES ('Quiet Study I');
