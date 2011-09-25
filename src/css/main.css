@@ -9,7 +9,7 @@ body
 
 #page
 {
-	margin-top: 5px;
+	margin-top: 15px;
 	margin-bottom: 5px;
 	background: white;
 	border: 1px solid #C9E0ED;
@@ -20,6 +20,7 @@ body
 	margin: 0;
 	padding: 0;
 	border-top: 3px solid #C9E0ED;
+	text-align: center;
 }
 
 #content
