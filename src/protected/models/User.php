@@ -7,6 +7,7 @@
  * @property integer $id
  * @property string $username
  * @property string $password
+ * @property string $salt
  * @property string $email
  */
 class User extends CActiveRecord
@@ -87,5 +88,15 @@ class User extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function validatePassword($password)
+	{
+		return $this->hashPassword($password,$this->salt)===$this->password;
+	}
+	
+	public function hashPassword($password, $salt)
+	{
+		return md5($salt.$password);
 	}
 }
