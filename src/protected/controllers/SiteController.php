@@ -29,6 +29,8 @@ class SiteController extends Controller
 	{
 		if(Yii::app()->user->isGuest) {
 			$this->actionLogin();
+		}else if(Yii::app()->user->getState("email", "") == "") {
+			$this->actionEditDetails();
 		}else {
 			$this->render('index');
 		}
@@ -101,5 +103,19 @@ class SiteController extends Controller
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
+	}
+	
+	public function actionEditDetails()
+	{
+		$model = new DetailsForm;
+		if(isset($_POST['DetailsForm'])) {
+			$model -> attributes=$_POST['DetailsForm'];
+			if($model->editDetails()) {
+				$this->render('index');
+				return;
+			}
+		}
+		
+		$this->render('details', array('model'=>$model));
 	}
 }
