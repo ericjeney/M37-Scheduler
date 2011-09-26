@@ -8,20 +8,19 @@
 class DetailsForm extends CFormModel
 {
 	public $password;
+	public $passwordConfirm;
 	public $email;
+	public $emailConfirm;
 
 	private $_identity;
 
-	/**
-	 * Declares the validation rules.
-	 * The rules state that username and password are required,
-	 * and password needs to be authenticated.
-	 */
 	public function rules()
 	{
 		return array(
-			// username and password are required
-			array('password, email', 'required'),
+			array('password, passwordConfirm, email, emailConfirm', 'required'),
+			array('email', 'email'),
+			array('passwordConfirm', 'compare', 'compareAttribute'=>'password'),
+			array('emailConfirm', 'compare', 'compareAttribute'=>'email'),
 		);
 	}
 
