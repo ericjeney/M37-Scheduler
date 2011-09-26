@@ -7,10 +7,12 @@ import random
 r = sys.argv[1]
 s = sys.argv[2]
 c = sys.argv[3]
+l = sys.argv[4]
 
 roster = open(r, 'r')
 sql = open(s, 'w')
 card = open(c, 'w')
+log = open(l, 'w')
 
 def getRandString():
         return ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890!@#$%^&*()_+', 8))
