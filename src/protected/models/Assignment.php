@@ -56,8 +56,8 @@ class Assignment extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'offering' => array(self::BELONGS_TO, 'TblOfferings', 'offering_id'),
-			'user' => array(self::BELONGS_TO, 'TblUser', 'user_id'),
+			'offering' => array(self::BELONGS_TO, 'Offering', 'offering_id'),
+			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 

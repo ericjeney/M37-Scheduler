@@ -67,6 +67,7 @@ class User extends CActiveRecord
 			'username' => 'Username',
 			'password' => 'Password',
 			'email' => 'Email',
+			'admin' => 'Admin',
 		);
 	}
 

@@ -59,9 +59,9 @@ class Offering extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tblAssignments' => array(self::HAS_MANY, 'TblAssignments', 'offering_id'),
-			'tblAssists' => array(self::HAS_MANY, 'TblAssist', 'offering_id'),
-			'tblPasses' => array(self::HAS_MANY, 'TblPass', 'offering_id'),
+			'tblAssignments' => array(self::HAS_MANY, 'Assignment', 'offering_id'),
+			//'tblAssists' => array(self::HAS_MANY, 'TblAssist', 'offering_id'),
+			//'tblPasses' => array(self::HAS_MANY, 'TblPass', 'offering_id'),
 		);
 	}
 
