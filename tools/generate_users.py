@@ -37,3 +37,4 @@ for line in roster:
 card.close()
 sql.close()
 roster.close()
+log.close()
