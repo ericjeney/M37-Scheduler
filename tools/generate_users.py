@@ -23,13 +23,13 @@ for line in roster:
                 m = hashlib.md5()
                 pas = getRandString()
                 salt = getRandString() 
-                m.update(salt+pas+'\n')
+                m.update(salt+pas)
                 md5 = m.hexdigest()
                 forCards = name + ", " + pas + "\n"
                 card.write(forCards)
                 forSql = "INSERT INTO tbl_user (username, password, salt) VALUES ('" + name + "', '" + md5 + "', '" + salt + "');\n"
                 sql.write(forSql)
-                forLog = ', '.join([name, pas, salt, md5])
+                forLog = ', '.join([name, pas, salt, salt+pas, md5])
                 log.write(forLog + '\n')
         else:
                 card.write("\n")
