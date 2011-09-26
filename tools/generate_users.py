@@ -17,15 +17,15 @@ def getRandString():
 
 for line in roster:
         if line != '\n':
-                name = "'" + line.strip() + "'"
+                name = line.strip()
                 m = hashlib.md5()
-                pas = "'" + getRandString() + "'"
-                salt =  "'" + getRandString() + "'"  
+                pas = getRandString()
+                salt = getRandString() 
                 m.update(salt+pas)
-                md5 = "'" + m.hexdigest() + "'"
+                md5 = m.hexdigest()
                 forCards = name + ", " + pas + "\n"
                 card.write(forCards)
-                forSql = "INSERT INTO tbl_user (username, password, salt) VALUES (" + name + ", " + md5 + ", " + salt + ");\n"
+                forSql = "INSERT INTO tbl_user (username, password, salt) VALUES ('" + name + "', '" + md5 + "', '" + salt + "');\n"
                 sql.write(forSql)
         else:
                 card.write("\n")
