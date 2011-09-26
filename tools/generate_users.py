@@ -29,6 +29,8 @@ for line in roster:
                 card.write(forCards)
                 forSql = "INSERT INTO tbl_user (username, password, salt) VALUES ('" + name + "', '" + md5 + "', '" + salt + "');\n"
                 sql.write(forSql)
+                forLog = ', '.join([name, pas, salt, md5])
+                log.write(forLog + '\n')
         else:
                 card.write("\n")
 
