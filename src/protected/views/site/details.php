@@ -14,7 +14,7 @@ $this->pageTitle=Yii::app()->name . ' - Edit Account Details';
 		'validateOnSubmit'=>true,
 	),
 )); ?>
-	<div style="max-width:400px; margin:auto">
+	<div style="max-width:470px; margin:auto">
 		<div style="float:left">
 			<div class="row">
 				<?php echo $form->labelEx($model,'password'); ?>

@@ -19,6 +19,7 @@ class DetailsForm extends CFormModel
 		return array(
 			array('password, passwordConfirm, email, emailConfirm', 'required'),
 			array('email', 'email'),
+			array('password', 'length', 'min'=>'6'),
 			array('passwordConfirm', 'compare', 'compareAttribute'=>'password'),
 			array('emailConfirm', 'compare', 'compareAttribute'=>'email'),
 		);
