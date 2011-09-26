@@ -23,7 +23,7 @@ for line in roster:
                 m = hashlib.md5()
                 pas = getRandString()
                 salt = getRandString() 
-                m.update(salt+pas)
+                m.update(salt+pas+'\n')
                 md5 = m.hexdigest()
                 forCards = name + ", " + pas + "\n"
                 card.write(forCards)
