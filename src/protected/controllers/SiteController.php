@@ -116,4 +116,29 @@ class SiteController extends Controller
 		
 		$this->render('details', array('model'=>$model));
 	}
+	
+	public function actionPicker()
+	{
+    	$model=new Assignment;
+	
+	    // uncomment the following code to enable ajax-based validation
+	    /*
+	    if(isset($_POST['ajax']) && $_POST['ajax']==='assignment-picker-form')
+	    {
+        	echo CActiveForm::validate($model);
+        	Yii::app()->end();
+    	}
+    	*/
+	
+	    if(isset($_POST['Assignment']))
+	    {
+        	$model->attributes=$_POST['Assignment'];
+        	if($model->validate())
+        	{
+	            // form inputs are valid, do something here
+            	return;
+        	}
+    	}
+    	$this->render('picker',array('model'=>$model));
+	}
 }
