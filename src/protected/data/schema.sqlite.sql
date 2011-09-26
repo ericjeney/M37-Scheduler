@@ -5,7 +5,8 @@ CREATE TABLE tbl_user (
     username VARCHAR(128) NOT NULL,
     password VARCHAR(128) NOT NULL,
     salt VARCHAR(10) NOT NULL,
-    email VARCHAR(128) DEFAULT ''
+    email VARCHAR(128) DEFAULT '',
+    admin BOOLEAN DEFAULT 0
 );
 
 CREATE TABLE tbl_offerings (

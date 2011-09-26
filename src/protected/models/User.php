@@ -9,6 +9,7 @@
  * @property string $password
  * @property string $salt
  * @property string $email
+ * @property boolean $admin
  */
 class User extends CActiveRecord
 {

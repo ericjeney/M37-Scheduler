@@ -21,16 +21,14 @@ class SiteController extends Controller
 		);
 	}
 
-	/**
-	 * This is the default 'index' action that is invoked
-	 * when an action is not explicitly requested by users.
-	 */
 	public function actionIndex()
 	{
 		if(Yii::app()->user->isGuest) {
 			$this->actionLogin();
 		}else if(Yii::app()->user->getState("email", "") == "") {
 			$this->actionEditDetails();
+		}else if(Yii::app()->user->getState("admin", false) != false) {
+			$this->render('admin');
 		}else {
 			$this->render('index');
 		}
