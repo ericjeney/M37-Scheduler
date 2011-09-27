@@ -29,7 +29,7 @@ class DetailsForm extends CFormModel
 		if(Yii::app()->user->isGuest) {
 			return false;
 		}else {
-			$user = User::model()->find('id=?', Yii::app()->user->id);
+			$user = User::model()->find('id=?', array(Yii::app()->user->id));
 			$user->password = $user->hashPassword($this->password,$user->salt);
 			$user->email = $this->email;
 			$user->save();

@@ -111,7 +111,7 @@ class SiteController extends Controller
 		$model = new DetailsForm;
 		if(isset($_POST['DetailsForm'])) {
 			$model -> attributes=$_POST['DetailsForm'];
-			if($model->editDetails()) {
+			if($model->validate() && $model->editDetails()) {
 				$this->actionIndex();
 				return;
 			}

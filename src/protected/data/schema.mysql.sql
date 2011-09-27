@@ -16,7 +16,7 @@ CREATE TABLE tbl_offerings (
 
 CREATE TABLE tbl_assignments (
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	assignment_date DATE,
+	assignment_date INTEGER(12),
 	user_id INTEGER,
 	offering_id INTEGER,
 	FOREIGN KEY(user_id) REFERENCES tbl_user(id),
