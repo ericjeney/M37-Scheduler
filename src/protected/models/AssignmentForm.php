@@ -10,25 +10,32 @@ class AssignmentForm extends CFormModel
 			array('offering', 'required'),
 		);
 	}
+	
+	public function attributeLabels()
+	{
+		return array(
+			'offering' => 'Activity',
+		);
+	}
 
-	/**
-	 * Edits the User's password and E-Mail.
-	 * @return boolean whether editing was successful or not
-	 */
 	public function editAssignment()
 	{
-		if(Yii::app()->user->isGuest) {
+		if(Yii::app()->user->isGuest || $this->offering == '') {
 			return false;
 		}else {
-			$assignment = Assignment::model().find("user_id=?", Yii::app()->user->id);
+			date_default_timezone_set("America/New_York");
+			$date = new CDbExpression(strtotime("next monday"));
+			$assignment = Assignment::model()->find('user_id=:id and assignment_date=:date', array(':id'=>Yii::app()->user->id, ':date'=>strtotime("next monday")));
 			
 			if($assignment == null) {
 				$assignment = new Assignment;
 				$assignment->user_id = Yii::app()->user->id;
 			}
 			
-			$assignment->offering_id = $offering;
+			$assignment->assignment_date = $date;
+			$assignment->offering_id = $this->offering;
 			$assignment->save();
+			return true;
 		}
 	}
 }

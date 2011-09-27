@@ -120,7 +120,7 @@ class SiteController extends Controller
 	
 	public function actionPicker()
 	{
-    	$model=new Assignment;
+    	$model=new AssignmentForm;
 	
 	    // uncomment the following code to enable ajax-based validation
 	    /*
@@ -131,14 +131,13 @@ class SiteController extends Controller
     	}
     	*/
 	
-	    if(isset($_POST['Assignment']))
+	    if(isset($_POST['AssignmentForm']))
 	    {
-        	$model->attributes=$_POST['Assignment'];
-        	if($model->validate())
-        	{
-	            // form inputs are valid, do something here
-            	return;
-        	}
+        	$model->attributes=$_POST['AssignmentForm'];
+        	if($model->validate() && $model->editAssignment()) {
+				$this->render('index');
+				return;
+			}
     	}
     	$this->render('picker',array('model'=>$model));
 	}

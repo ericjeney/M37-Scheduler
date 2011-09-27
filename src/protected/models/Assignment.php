@@ -70,7 +70,7 @@ class Assignment extends CActiveRecord
 			'id' => 'ID',
 			'assignment_date' => 'Assignment Date',
 			'user_id' => 'User',
-			'offering_id' => 'Offering',
+			'offering_id' => 'Activity',
 		);
 	}
 
