@@ -232,3 +232,7 @@ div.search-form
 .center {
 	text-align: center;
 }
+
+form select {
+	font-size: 18px;
+}

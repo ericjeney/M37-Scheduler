@@ -30,8 +30,8 @@ class SiteController extends Controller
 		}else if(Yii::app()->user->getState("admin", false) != false) {
 			$this->render('admin');
 		}else {
-			//$this->render('index');
-			$this->actionPicker();
+			$this->render('index');
+			//$this->actionPicker();
 		}
 	}
 
