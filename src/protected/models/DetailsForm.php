@@ -34,7 +34,7 @@ class DetailsForm extends CFormModel
 			$user->email = $this->email;
 			$user->save();
 			
-			Yii::app()->user->setState("email", $email);
+			Yii::app()->user->setState("email", $this->email);
 			return true;
 		}
 	}
