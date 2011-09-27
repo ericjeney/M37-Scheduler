@@ -94,4 +94,9 @@ class Assignment extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public static function currentAssignment() {
+		date_default_timezone_set("America/New_York");
+		return Assignment::model()->find('user_id=:id and assignment_date=:date', array(':id'=>Yii::app()->user->id, ':date'=>strtotime("next monday")));
+	}
 }

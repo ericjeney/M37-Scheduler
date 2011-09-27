@@ -29,6 +29,8 @@ class SiteController extends Controller
 			$this->actionEditDetails();
 		}else if(Yii::app()->user->getState("admin", false) != false) {
 			$this->render('admin');
+		}else if(Assignment::model()->currentAssignment() == null) {
+			$this->actionPicker();
 		}else {
 			$this->render('index');
 			//$this->actionPicker();
@@ -110,7 +112,7 @@ class SiteController extends Controller
 		if(isset($_POST['DetailsForm'])) {
 			$model -> attributes=$_POST['DetailsForm'];
 			if($model->editDetails()) {
-				$this->render('index');
+				$this->actionIndex();
 				return;
 			}
 		}

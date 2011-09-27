@@ -15,7 +15,7 @@ $this->pageTitle=Yii::app()->name . ' - Select Activity';
 	<div align="center">
 		<div class="row">
 			<?php echo $form->labelEx($model,'offering'); ?>
-			<?php echo $form->dropDownList($model,'offering', CHtml::listData(Offering::model()->findAll(), 'id', 'title'), array("prompt"=>"Please Select an Activity")); ?>
+			<?php echo $form->dropDownList($model,'offering', CHtml::listData(Offering::model()->findAll("hidden != 1"), 'id', 'title'), array("prompt"=>"Please Select an Activity")); ?>
 			<?php echo $form->error($model,'offering'); ?>
 		</div>
 	
