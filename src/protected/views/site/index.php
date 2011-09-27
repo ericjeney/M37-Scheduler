@@ -5,7 +5,6 @@
 	<h3>You are currently registered for:
 		
 	<?php
-		date_default_timezone_set("America/New_York");
 		$assignment = Assignment::model()->currentAssignment();
 		if($assignment == null) {
 			echo "Nothing!  Please sign up!";

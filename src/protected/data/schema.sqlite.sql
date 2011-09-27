@@ -14,6 +14,8 @@ CREATE TABLE tbl_user (
     admin BOOLEAN DEFAULT 0
 );
 
+CREATE UNIQUE INDEX username ON tbl_user(username);
+
 CREATE TABLE tbl_offerings (
 	id INTEGER NOT NULL PRIMARY KEY,
 	title VARCHAR(30) NOT NULL,

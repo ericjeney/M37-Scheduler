@@ -8,14 +8,14 @@ CREATE TABLE tbl_user (
 );
 
 CREATE TABLE tbl_offerings (
-	id INTEGER NOT NULL PRIMARY KEY,
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	title VARCHAR(30) NOT NULL,
 	room VARCHAR(3) DEFAULT '',
 	hidden BOOLEAN DEFAULT 0
 );
 
 CREATE TABLE tbl_assignments (
-	id INTEGER NOT NULL PRIMARY KEY,
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	assignment_date DATE,
 	user_id INTEGER,
 	offering_id INTEGER,
@@ -24,7 +24,7 @@ CREATE TABLE tbl_assignments (
 );
 
 CREATE TABLE tbl_pass (
-	id INTEGER NOT NULL PRIMARY KEY,
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	user_id INTEGER,
 	offering_id INTEGER,
 	FOREIGN KEY(user_id) REFERENCES tbl_user(id),
@@ -32,7 +32,7 @@ CREATE TABLE tbl_pass (
 );
 
 CREATE TABLE tbl_assist (
-	id INTEGER NOT NULL PRIMARY KEY,
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	user_id INTEGER,
 	offering_id INTEGER,
 	FOREIGN KEY(user_id) REFERENCES tbl_user(id),
@@ -40,7 +40,7 @@ CREATE TABLE tbl_assist (
 );
 
 CREATE TABLE tbl_matchup (
-	id INTEGER NOT NULL PRIMARY KEY,
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	match_date DATE,
 	pass_id INTEGER,
 	assist_id INTEGER,
