@@ -1,16 +1,14 @@
 <?php
 
 /**
- * ContactForm class.
- * ContactForm is the data structure for keeping
- * contact form data. It is used by the 'contact' action of 'SiteController'.
+ * FeedbackForm class.
+ * FeedbackForm is the data structure for keeping
+ * feedback form data. It is used by the 'feedback' action of 'SiteController'.
  */
-class ContactForm extends CFormModel
+class FeedbackForm extends CFormModel
 {
-	public $name;
-	public $email;
-	public $subject;
-	public $body;
+	public $good;
+	public $bad;
 	public $verifyCode;
 
 	/**
@@ -20,9 +18,7 @@ class ContactForm extends CFormModel
 	{
 		return array(
 			// name, email, subject and body are required
-			array('name, email, subject, body', 'required'),
-			// email has to be a valid email address
-			array('email', 'email'),
+			array('good, bad', 'required'),
 			// verifyCode needs to be entered correctly
 			array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
 		);
@@ -37,6 +33,8 @@ class ContactForm extends CFormModel
 	{
 		return array(
 			'verifyCode'=>'Verification Code',
+                        'good'=>'What Worked',
+                        'bad'=>'What Didn\'t Work'
 		);
 	}
 }
