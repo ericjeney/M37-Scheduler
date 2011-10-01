@@ -21,14 +21,18 @@ class UserIdentity extends CUserIdentity
 		}else if(!$user->validatePassword($this->password)) {
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		}else {
-			$this->_id = $user->id;
-			$this->username = $user->username;
-			$this->setState("email", $user->email);
-			$this->setState("admin", $user->admin);
-			$this->errorCode = self::ERROR_NONE;
+			$this->login($user);
 		}
 		
 		return $this->errorCode == self::ERROR_NONE;
+	}
+	
+	public function login($user) {
+		$this->_id = $user->id;
+		$this->username = $user->username;
+		$this->setState("email", $user->email);
+		$this->setState("admin", $user->admin);
+		$this->errorCode = self::ERROR_NONE;
 	}
 	
 	public function getId() {

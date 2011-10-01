@@ -141,4 +141,27 @@ class SiteController extends Controller
 			$this->render('index');
 		}
 	}
+	
+	public function actionBecomeUser()
+	{
+		if(Yii::app()->user->getState("admin", false) != false)
+		{
+			$model = new BecomeUserForm;
+			
+			if(isset($_POST['BecomeUserForm']))
+			{
+				$model->attributes=$_POST['BecomeUserForm'];
+				if($model->validate())
+				{
+					$model->becomeUser();
+					$this->actionIndex();
+					return;
+				}
+			}
+			
+			$this->render('becomeUser', array('model'=>$model));
+		}else {
+			$this->actionIndex();
+		}
+	}
 }

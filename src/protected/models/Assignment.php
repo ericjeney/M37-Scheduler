@@ -119,11 +119,15 @@ class Assignment extends CActiveRecord
 		$day = date('D');
 		$assignment = Assignment::model()->find('user_id=:id and assignment_date=:date', array(':id'=>Yii::app()->user->id, ':date'=>strtotime("next monday")));
 		if($day == 'Sat' || $day == 'Sun') {
+			if($assignment == null) {
+				$assignment = new Assignment;
+				$assignment->offering_id = 29;
+			}
 			$assignment->status = 3;
 		}else if($assignment != null) {
 			$assignment->status = 1;
 		}else {
-			$assignment->status = 0;
+			return null;
 		}
 		
 		return $assignment;
