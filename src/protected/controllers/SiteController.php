@@ -122,25 +122,31 @@ class SiteController extends Controller
 	
 	public function actionPicker()
 	{
-    	$model=new AssignmentForm;
-	
-	    // uncomment the following code to enable ajax-based validation
-	    /*
-	    if(isset($_POST['ajax']) && $_POST['ajax']==='assignment-picker-form')
-	    {
-        	echo CActiveForm::validate($model);
-        	Yii::app()->end();
-    	}
-    	*/
-	
-	    if(isset($_POST['AssignmentForm']))
-	    {
-        	$model->attributes=$_POST['AssignmentForm'];
-        	if($model->validate() && $model->editAssignment()) {
-				$this->render('index');
-				return;
-			}
-    	}
-    	$this->render('picker',array('model'=>$model));
-	}
+                $day = date('D');
+                if (!($day == 'Sat' || $day == 'Sun'))
+                {
+                        $model=new AssignmentForm;
+                        // uncomment the following code to enable ajax-based validation
+                        /*
+                                if(isset($_POST['ajax']) && $_POST['ajax']==='assignment-picker-form')
+                                {
+                                        echo CActiveForm::validate($model);
+                                        Yii::app()->end();
+                                }
+                         */
+                        if(isset($_POST['AssignmentForm']))
+                        {
+                                $model->attributes=$_POST['AssignmentForm'];
+                                if($model->validate() && $model->editAssignment())
+                                {
+                                        $this->render('index');
+                                        return;
+                                }
+                        }
+        
+                        $this->render('picker',array('model'=>$model));
+                }
+
+                $this->render('index');
+        }
 }
