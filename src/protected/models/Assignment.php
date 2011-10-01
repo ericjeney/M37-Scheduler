@@ -16,6 +16,14 @@
 class Assignment extends CActiveRecord
 {
 	/**
+	 * Statuses:
+	 * 		0: No Assignment Exists
+	 * 		1: Normal Assignment
+	 * 		2: Mandatory Assignment
+	 */
+	public $status;
+	
+	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Assignment the static model class
 	 */
@@ -97,6 +105,13 @@ class Assignment extends CActiveRecord
 
 	public static function currentAssignment() {
 		date_default_timezone_set("America/New_York");
-		return Assignment::model()->find('user_id=:id and assignment_date=:date', array(':id'=>Yii::app()->user->id, ':date'=>strtotime("next monday")));
+		$assignment = Assignment::model()->find('user_id=:id and assignment_date=:date', array(':id'=>Yii::app()->user->id, ':date'=>strtotime("next monday")));
+		if($assignment != null) {
+			$assignment->status = 1;
+		}else {
+			$assignment->status = 0;
+		}
+		
+		return $assignment;
 	}
 }
