@@ -137,8 +137,8 @@ class SiteController extends Controller
 			}
 
 			$this->render('picker',array('model'=>$model));
+		}else {
+			$this->render('index');
 		}
-
-		$this->render('index');
 	}
 }
