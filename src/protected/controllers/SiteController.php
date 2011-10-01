@@ -122,9 +122,8 @@ class SiteController extends Controller
 	
 	public function actionPicker()
 	{
-		date_default_timezone_set("America/New_York");
-		$day = date('D');
-		if (!($day == 'Sat' || $day == 'Sun'))
+		$assignment = Assignment::currentAssignment();
+		if ($assignment->status <= 1)
 		{
 			$model=new AssignmentForm;
 			if(isset($_POST['AssignmentForm']))

@@ -14,10 +14,13 @@
 		}
 	?></h3>
         <h4><?php
-			$day = date('D');
-			if($day == 'Sat' || $day == 'Sun')
+			if($assignment->status == 3)
 			{
 				echo 'The offering selection period has ended and you cannot change your selection anymore.';
+			}
+			else if($assignment->status == 2)
+			{
+				echo 'This assignment cannot be changed.';
 			}
 			else
 			{

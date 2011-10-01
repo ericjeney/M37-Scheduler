@@ -1,32 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "tbl_assignments".
+ * This is the model class for table "tbl_assist".
  *
- * The followings are the available columns in table 'tbl_assignments':
+ * The followings are the available columns in table 'tbl_assist':
  * @property integer $id
- * @property string $assignment_date
  * @property integer $user_id
  * @property integer $offering_id
  *
  * The followings are the available model relations:
  * @property TblOfferings $offering
  * @property TblUser $user
+ * @property TblMatchup[] $tblMatchups
  */
-class Assignment extends CActiveRecord
+class Assist extends CActiveRecord
 {
 	/**
-	 * Statuses:
-	 * 		0: No Assignment Exists
-	 * 		1: Normal Assignment
-	 * 		2: Mandatory Assignment
-	 * 		3: Can't be changed due to date.
-	 */
-	public $status;
-	
-	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Assignment the static model class
+	 * @return Assist the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -38,7 +29,7 @@ class Assignment extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'tbl_assignments';
+		return 'tbl_assist';
 	}
 
 	/**
@@ -50,10 +41,9 @@ class Assignment extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('user_id, offering_id', 'numerical', 'integerOnly'=>true),
-			array('assignment_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, assignment_date, user_id, offering_id', 'safe', 'on'=>'search'),
+			array('id, user_id, offering_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,6 +57,7 @@ class Assignment extends CActiveRecord
 		return array(
 			'offering' => array(self::BELONGS_TO, 'Offering', 'offering_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+			//'tblMatchups' => array(self::HAS_MANY, 'TblMatchup', 'assist_id'),
 		);
 	}
 
@@ -77,9 +68,8 @@ class Assignment extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'assignment_date' => 'Assignment Date',
 			'user_id' => 'User',
-			'offering_id' => 'Activity',
+			'offering_id' => 'Offering',
 		);
 	}
 
@@ -95,7 +85,6 @@ class Assignment extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('assignment_date',$this->assignment_date,true);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('offering_id',$this->offering_id);
 
@@ -103,29 +92,8 @@ class Assignment extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-
-	public static function currentAssignment() {
-		date_default_timezone_set("America/New_York");
-		
-		$assist = Assist::findAssistForUser(Yii::app()->user->id);
-		if($assist != null) {
-			// They're in something mandatory.
-			$assignment = new Assignment;
-			$assignment->offering_id = $assist->offering_id;
-			$assignment->status = 2;
-			return $assignment;
-		}
-		
-		$day = date('D');
-		$assignment = Assignment::model()->find('user_id=:id and assignment_date=:date', array(':id'=>Yii::app()->user->id, ':date'=>strtotime("next monday")));
-		if($day != 'Sat' && $day != 'Sun') {
-			$assignment->status = 3;
-		}else if($assignment != null) {
-			$assignment->status = 1;
-		}else {
-			$assignment->status = 0;
-		}
-		
-		return $assignment;
+	
+	public static function findAssistForUser($id) {
+		return Assist::model()->find("user_id=?", array($id));
 	}
 }
