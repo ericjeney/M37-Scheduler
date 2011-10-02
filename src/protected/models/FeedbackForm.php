@@ -33,8 +33,8 @@ class FeedbackForm extends CFormModel
 	{
 		return array(
 			'verifyCode'=>'Verification Code',
-                        'good'=>'What Worked',
-                        'bad'=>'What Didn\'t Work'
+			'good'=>'What do you think worked?',
+			'bad'=>'What do you think didn\'t work?'
 		);
 	}
 }
