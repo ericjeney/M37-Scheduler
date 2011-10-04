@@ -18,7 +18,7 @@ CREATE UNIQUE INDEX username ON tbl_user(username);
 
 CREATE TABLE tbl_offerings (
 	id INTEGER NOT NULL PRIMARY KEY,
-	title VARCHAR(30) NOT NULL,
+	title VARCHAR(40) NOT NULL,
 	room VARCHAR(3) DEFAULT '',
 	hidden BOOLEAN DEFAULT 0
 );
@@ -82,7 +82,7 @@ INSERT INTO tbl_offerings (title, hidden) VALUES ('AP British Literature', 1);
 INSERT INTO tbl_offerings (title, hidden) VALUES ('American Literature II', 1);
 INSERT INTO tbl_offerings (title, hidden) VALUES ('Spanish', 1); --Probably not being offered
 
-INSERT INTO tbl_offerings (title) VALUES ('Screamin Eagles');
+INSERT INTO tbl_offerings (title) VALUES ('Screamin Eagles Vocal Ensemble');
 INSERT INTO tbl_offerings (title) VALUES ('Baila Baila');
 INSERT INTO tbl_offerings (title) VALUES ('Reading Roundtables');
 INSERT INTO tbl_offerings (title) VALUES ('Standardized Test Prep');
