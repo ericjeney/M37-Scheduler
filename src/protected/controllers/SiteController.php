@@ -123,7 +123,7 @@ class SiteController extends Controller
 	public function actionPicker()
 	{
 		$assignment = Assignment::currentAssignment();
-		if ($assignment->status <= 1)
+		if ($assignment == null || $assignment->status <= 1)
 		{
 			$model=new AssignmentForm;
 			if(isset($_POST['AssignmentForm']))
