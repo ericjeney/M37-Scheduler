@@ -64,8 +64,7 @@ class SiteController extends Controller
 				$model->attributes=$_POST['FeedbackForm'];
 				if($model->validate())
 				{
-					$headers="From: {$model->email}\r\nReply-To: {$model->email}";
-					mail(Yii::app()->params['adminEmail'],$model->subject,$model->body,$headers);
+					$model->sendFeedback();
 					Yii::app()->user->setFlash('feedback','Thank you for providing us with feedback!');
 					$this->refresh();
 				}

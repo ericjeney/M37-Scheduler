@@ -34,4 +34,20 @@ class FeedbackForm extends CFormModel
 			'bad'=>'What do you think didn\'t work?'
 		);
 	}
+
+	public function sendFeedback()
+	{
+		/* $to = 'shreyas.chand@gmail.com'; */
+		$admins = User::model()->findAll("admin = 1");
+		$to = '';
+		foreach($admins as $admin)
+			$to .= $admin . ', ';
+		$to = substr($to, 0, -2);
+		
+		$body = "Feedback for M37 was submitted by " . Yii::app()->user->getState("username","") . ".\r\nHere's what they said:\r\n\r\n";
+		$body .= "What worked:\r\n" . $this->good . "\r\n\r\n";
+		$body .= "What didn't work:\r\n" . $this->bad . "\r\n\r\n";
+
+		mail($to,'Feedback for M37',$body);
+	}
 }
