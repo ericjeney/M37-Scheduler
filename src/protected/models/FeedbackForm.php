@@ -9,7 +9,6 @@ class FeedbackForm extends CFormModel
 {
 	public $good;
 	public $bad;
-	public $verifyCode;
 
 	/**
 	 * Declares the validation rules.
@@ -20,7 +19,6 @@ class FeedbackForm extends CFormModel
 			// name, email, subject and body are required
 			array('good, bad', 'required'),
 			// verifyCode needs to be entered correctly
-			array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
 		);
 	}
 
@@ -32,7 +30,6 @@ class FeedbackForm extends CFormModel
 	public function attributeLabels()
 	{
 		return array(
-			'verifyCode'=>'Verification Code',
 			'good'=>'What do you think worked?',
 			'bad'=>'What do you think didn\'t work?'
 		);
