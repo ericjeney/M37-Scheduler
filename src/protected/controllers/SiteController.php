@@ -56,22 +56,18 @@ class SiteController extends Controller
 	 */
 	public function actionFeedback()
 	{
-		if(Yii::app()->user->isGuest)
+		$model=new FeedbackForm;
+		if(isset($_POST['FeedbackForm']))
 		{
-			$model=new FeedbackForm;
-			if(isset($_POST['FeedbackForm']))
+			$model->attributes=$_POST['FeedbackForm'];
+			if($model->validate())
 			{
-				$model->attributes=$_POST['FeedbackForm'];
-				if($model->validate())
-				{
-					$model->sendFeedback();
-					Yii::app()->user->setFlash('feedback','Thank you for providing us with feedback!');
-					$this->refresh();
-				}
+				$model->sendFeedback();
+				Yii::app()->user->setFlash('feedback','Thank you for providing us with feedback!');
+				$this->refresh();
 			}
-			$this->render('feedback',array('model'=>$model));
 		}
-		$this->redirect(Yii::app()->homeUrl);
+		$this->render('feedback',array('model'=>$model));
 	}
 
 	/**
@@ -111,72 +107,60 @@ class SiteController extends Controller
 	
 	public function actionEditDetails()
 	{
-		if(Yii::app()->user->isGuest)
-		{
-			$model = new DetailsForm;
-			if(isset($_POST['DetailsForm'])) {
-				$model -> attributes=$_POST['DetailsForm'];
-				if($model->validate() && $model->editDetails()) {
-					$this->actionIndex();
-					return;
-				}
+		$model = new DetailsForm;
+		if(isset($_POST['DetailsForm'])) {
+			$model -> attributes=$_POST['DetailsForm'];
+			if($model->validate() && $model->editDetails()) {
+				$this->actionIndex();
+				return;
 			}
-				
-			$this->render('details', array('model'=>$model));
 		}
-		$this->redirect(Ypp()->homeUrl);
+			
+		$this->render('details', array('model'=>$model));
 	}
 	
 	public function actionPicker()
 	{
-		if(Yii::app()->user->isGuest)
+		$assignment = Assignment::currentAssignment();
+		if ($assignment == null || $assignment->status <= 1)
 		{
-			$assignment = Assignment::currentAssignment();
-			if ($assignment == null || $assignment->status <= 1)
+			$model=new AssignmentForm;
+			if(isset($_POST['AssignmentForm']))
 			{
-				$model=new AssignmentForm;
-				if(isset($_POST['AssignmentForm']))
+				$model->attributes=$_POST['AssignmentForm'];
+				if($model->validate() && $model->editAssignment())
 				{
-					$model->attributes=$_POST['AssignmentForm'];
-					if($model->validate() && $model->editAssignment())
-					{
-						$this->render('index');
-						return;
-					}
+					$this->render('index');
+					return;
 				}
-	
-				$this->render('picker',array('model'=>$model));
-			}else {
-				$this->render('index');
 			}
+
+			$this->render('picker',array('model'=>$model));
+		}else {
+			$this->render('index');
 		}
-		$this->redirect(Yii::app()->homeUrl);
 	}
 	
 	public function actionBecomeUser()
 	{
-		if(Yii::app()->user->isGuest)
+		if(Yii::app()->user->getState("admin", false) != false)
 		{
-			if(Yii::app()->user->getState("admin", false) != false)
+			$model = new BecomeUserForm;
+			
+			if(isset($_POST['BecomeUserForm']))
 			{
-				$model = new BecomeUserForm;
-				
-				if(isset($_POST['BecomeUserForm']))
+				$model->attributes=$_POST['BecomeUserForm'];
+				if($model->validate())
 				{
-					$model->attributes=$_POST['BecomeUserForm'];
-					if($model->validate())
-					{
-						$model->becomeUser();
-						$this->actionIndex();
-						return;
-					}
+					$model->becomeUser();
+					$this->actionIndex();
+					return;
 				}
-				
-				$this->render('becomeUser', array('model'=>$model));
-			}else {
-				$this->actionIndex();
 			}
+			
+			$this->render('becomeUser', array('model'=>$model));
+		}else {
+			$this->actionIndex();
 		}
-		$this->redirect(Yii::app()->homeUrl);
 	}
 }
