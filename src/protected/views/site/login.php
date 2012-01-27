@@ -6,6 +6,12 @@ $this->pageTitle=Yii::app()->name . ' - Login';
 
 <h1 class="center">Login</h1>
 
+<?php
+    foreach(Yii::app()->user->getFlashes() as $key => $message) {
+        echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
+    }
+?>
+
 <div class="form center">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',

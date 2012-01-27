@@ -121,23 +121,28 @@ class SiteController extends Controller
 	
 	public function actionPicker()
 	{
-		$assignment = Assignment::currentAssignment();
-		if ($assignment == null || $assignment->status <= 1)
-		{
-			$model=new AssignmentForm;
-			if(isset($_POST['AssignmentForm']))
+		if(!Yii::app()->user->isGuest) {
+			$assignment = Assignment::currentAssignment();
+			if ($assignment == null || $assignment->status <= 1)
 			{
-				$model->attributes=$_POST['AssignmentForm'];
-				if($model->validate() && $model->editAssignment())
+				$model=new AssignmentForm;
+				if(isset($_POST['AssignmentForm']))
 				{
-					$this->render('index');
-					return;
+					$model->attributes=$_POST['AssignmentForm'];
+					if($model->validate() && $model->editAssignment())
+					{
+						$this->render('index');
+						return;
+					}
 				}
-			}
 
-			$this->render('picker',array('model'=>$model));
-		}else {
-			$this->render('index');
+				$this->render('picker',array('model'=>$model));
+			}else {
+				$this->render('index');
+			}
+		} else {
+			Yii::app()->user->setFlash('error', 'You must login first!');
+			$this->redirect(array('site/login'));
 		}
 	}
 	
