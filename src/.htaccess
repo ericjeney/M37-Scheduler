@@ -1,0 +1,15 @@
+Allow from 69.119.52.63
+Deny from all
+
+
+Options +FollowSymLinks -MultiViews
+IndexIgnore */*
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    RewriteRule ^.*$ /index.php
+</IfModule>
