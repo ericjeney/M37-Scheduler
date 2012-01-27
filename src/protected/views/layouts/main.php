@@ -49,11 +49,14 @@
 	<?php endif?>
 
 	<?php
+	$flashMessages = Yii::app()->user->getFlashes();
+	if($flashMessages) {
 		echo '<div class="flashNotifications">';
-	    foreach(Yii::app()->user->getFlashes() as $key => $message) {
+	    foreach($flashMessages as $key => $message) {
 	        echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
 	    }
 	    echo '</div>';
+	}
 	?>
 
 	<?php echo $content; ?>
