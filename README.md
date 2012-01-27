@@ -15,6 +15,7 @@ Remember to change the following things when using this tool on a production ser
 - Switch from SQLite to MySQL (or another production database)
 - Disable Gii (used for code generation, definitely not needed in production)
 - Remove default users (test1, test2, test3)
+- Add Google Analytics (or other analytics service) code snippet to `src/protected/views/layouts/main.php`
 
 ### Default Users ###
 
