@@ -1,7 +1,3 @@
-Allow from 69.119.52.63
-Deny from all
-
-
 Options +FollowSymLinks -MultiViews
 IndexIgnore */*
 
