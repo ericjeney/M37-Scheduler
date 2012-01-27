@@ -56,18 +56,23 @@ class SiteController extends Controller
 	 */
 	public function actionFeedback()
 	{
-		$model=new FeedbackForm;
-		if(isset($_POST['FeedbackForm']))
-		{
-			$model->attributes=$_POST['FeedbackForm'];
-			if($model->validate())
+		if(!Yii::app()->user->isGuest) {
+			$model=new FeedbackForm;
+			if(isset($_POST['FeedbackForm']))
 			{
-				$model->sendFeedback();
-				Yii::app()->user->setFlash('feedback','Thank you for providing us with feedback!');
-				$this->refresh();
+				$model->attributes=$_POST['FeedbackForm'];
+				if($model->validate())
+				{
+					$model->sendFeedback();
+					Yii::app()->user->setFlash('feedback','Thank you for providing us with feedback!');
+					$this->refresh();
+				}
 			}
+			$this->render('feedback',array('model'=>$model));
+		} else {
+			Yii::app()->user->setFlash('error', 'You must login first!');
+			$this->redirect(array('site/login'));
 		}
-		$this->render('feedback',array('model'=>$model));
 	}
 
 	/**
@@ -107,16 +112,20 @@ class SiteController extends Controller
 	
 	public function actionEditDetails()
 	{
-		$model = new DetailsForm;
-		if(isset($_POST['DetailsForm'])) {
-			$model -> attributes=$_POST['DetailsForm'];
-			if($model->validate() && $model->editDetails()) {
-				$this->actionIndex();
-				return;
+		if(!Yii::app()->user->isGuest) {
+			$model = new DetailsForm;
+			if(isset($_POST['DetailsForm'])) {
+				$model -> attributes=$_POST['DetailsForm'];
+				if($model->validate() && $model->editDetails()) {
+					$this->actionIndex();
+					return;
+				}
 			}
+			$this->render('details', array('model'=>$model));
+		} else {
+			Yii::app()->user->setFlash('error', 'You must login first!');
+			$this->redirect(array('site/login'));
 		}
-			
-		$this->render('details', array('model'=>$model));
 	}
 	
 	public function actionPicker()
@@ -165,7 +174,8 @@ class SiteController extends Controller
 			
 			$this->render('becomeUser', array('model'=>$model));
 		}else {
-			$this->actionIndex();
+			Yii::app()->user->setFlash('error', 'You are not allowed to view that page!');
+			$this->redirect(array('site/index'));
 		}
 	}
 }

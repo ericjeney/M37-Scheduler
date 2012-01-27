@@ -81,6 +81,12 @@ body
 	text-decoration:none;
 }
 
+div.flashNotifications
+{
+	padding: 10px;
+	padding-bottom: 0px;
+}
+
 div.flash-error, div.flash-notice, div.flash-success
 {
 	padding:.8em;
