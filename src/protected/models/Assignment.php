@@ -121,7 +121,7 @@ class Assignment extends CActiveRecord
 		if($day == 'Sun') {
 			if($assignment == null) {
 				$assignment = new Assignment;
-				$assignment->offering_id = 29;
+				$assignment->offering_id = 29; //Quiet Study
 			}
 			$assignment->status = 3;
 		}else if($assignment != null) {
