@@ -58,6 +58,14 @@ CREATE TABLE tbl_matchup (
 	FOREIGN KEY(assist_id) REFERENCES tbl_assist(id)
 );
 
+CREATE TABLE tbl_passwordResetRequests (
+	id INTEGER NOT NULL PRIMARY KEY,
+	user_id INTEGER,
+	new_password VARCHAR(128),
+	creation_time INTEGER,
+	reset_code VARCHAR(15)
+);
+
 INSERT INTO tbl_offerings (title) VALUES ('ECET');
 INSERT INTO tbl_offerings (title) VALUES ('CMET');
 INSERT INTO tbl_offerings (title) VALUES ('AP Calculus');
