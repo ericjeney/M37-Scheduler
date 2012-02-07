@@ -178,4 +178,30 @@ class SiteController extends Controller
 			$this->redirect(array('site/index'));
 		}
 	}
+	
+	public function actionForgotPassword()
+	{
+		$model=new ForgotPasswordForm;
+
+		// uncomment the following code to enable ajax-based validation
+
+		if(isset($_POST['ajax']) && $_POST['ajax']==='forgot-password-form-forgotPassword-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+
+
+		if(isset($_POST['ForgotPasswordForm']))
+		{
+			$model->attributes=$_POST['ForgotPasswordForm'];
+			if($model->validate())
+			{
+				// form inputs are valid, do something here
+				return;
+			}
+		}
+		$this->render('forgotPassword',array('model'=>$model));
+	}
+		
 }
