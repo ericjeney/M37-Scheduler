@@ -183,21 +183,16 @@ class SiteController extends Controller
 	{
 		$model=new ForgotPasswordForm;
 
-		// uncomment the following code to enable ajax-based validation
-
-		if(isset($_POST['ajax']) && $_POST['ajax']==='forgot-password-form-forgotPassword-form')
-		{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='forgotPassword-form') {
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 
-
-		if(isset($_POST['ForgotPasswordForm']))
-		{
+		if(isset($_POST['ForgotPasswordForm'])) {
 			$model->attributes=$_POST['ForgotPasswordForm'];
 			if($model->validate())
 			{
-				// form inputs are valid, do something here
+				$model->requestPasswordReset();
 				return;
 			}
 		}

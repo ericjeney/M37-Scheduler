@@ -37,12 +37,11 @@ class FeedbackForm extends CFormModel
 
 	public function sendFeedback()
 	{
-		/* $to = 'shreyas.chand@gmail.com'; */
 		$admins = User::model()->findAll("admin = 1");
 		$to = '';
 		foreach($admins as $admin)
 			$to .= $admin->email . ', ';
-		$to = substr($to, 0, -2);
+		$to = substr($to, 0, -2); //Remove trailing ', '
 		
 		$body = "Feedback for M37 was submitted by " . Yii::app()->user->name . ".\r\nHere's what they said:\r\n\r\n";
 		$body .= "What worked:\r\n" . $this->good . "\r\n\r\n";
