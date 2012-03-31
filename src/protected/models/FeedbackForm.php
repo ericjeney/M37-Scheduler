@@ -43,7 +43,7 @@ class FeedbackForm extends CFormModel
 			$to .= $admin->email . ', ';
 		$to = substr($to, 0, -2); //Remove trailing ', '
 		
-		$body = "Feedback for M37 was submitted by " . Yii::app()->user->name . ".\r\nHere's what they said:\r\n\r\n";
+		$body = "Feedback for M37 was submitted by " . Yii::app()->user->name . "(". Yii::app()->user->email . ")" . ".\r\nHere's what they said:\r\n\r\n";
 		$body .= "What worked:\r\n" . $this->good . "\r\n\r\n";
 		$body .= "What didn't work:\r\n" . $this->bad . "\r\n\r\n";
 
